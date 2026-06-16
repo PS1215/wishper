@@ -1,3 +1,4 @@
+print("APP STARTED")
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_socketio import SocketIO, join_room, leave_room, send
 import random
@@ -6,11 +7,7 @@ from string import ascii_uppercase
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "your_secret_key_here"
 
-socketio = SocketIO(
-    app,
-    cors_allowed_origins="*",
-    async_mode="threading"
-)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 rooms = {}
 
@@ -95,9 +92,9 @@ def room():
         messages=rooms[room]["messages"]
     )
 
-
 @socketio.on("connect")
 def handle_connect():
+    print("SOCKET CONNECTED")
     room = session.get("room")
     name = session.get("name")
 
