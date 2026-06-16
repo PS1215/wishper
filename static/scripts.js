@@ -1,4 +1,6 @@
-const socket = io.connect(window.location.origin);
+const socket = io();
+
+console.log("scripts.js loaded");
 
 socket.on("connect", () => {
     console.log("Connected:", socket.id);
@@ -7,8 +9,6 @@ socket.on("connect", () => {
 socket.on("disconnect", () => {
     console.log("Disconnected");
 });
-
-const socket = io.connect(window.location.origin);
 
 document.getElementById('message-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -28,8 +28,7 @@ socket.on('message', function(data) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message');
 
-    messageDiv.innerHTML =
-        `<strong>${data.name}:</strong> ${data.message}`;
+    messageDiv.innerHTML = `<strong>${data.name}:</strong> ${data.message}`;
 
     messagesDiv.appendChild(messageDiv);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
