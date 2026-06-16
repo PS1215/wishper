@@ -1,5 +1,15 @@
 const socket = io.connect(window.location.origin);
 
+socket.on("connect", () => {
+    console.log("Connected:", socket.id);
+});
+
+socket.on("disconnect", () => {
+    console.log("Disconnected");
+});
+
+const socket = io.connect(window.location.origin);
+
 document.getElementById('message-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
